@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -36,30 +37,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Observable<List<String>> test = Observable.zip(
+        Observable<List<String>> ambilSemuaData = Observable.zip(
                 RxGetDatas.getDatas(),
-                RxGetDatas.getDatasById(USER_ID), (s, s2) -> {
-                    List<String> test1 = new ArrayList<>();
-                    test1.add(s);
-                    test1.add(s2);
-                    return test1;
+                RxGetDatas.getDatasById(USER_ID), (s, s1) -> {
+                    List<String> results = new ArrayList<>();
+                    results.add(s);
+                    results.add(s1);
+                    return results;
                 }
         );
 
-        subscriber = test.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onSuccess, this::onError);
+        subscriber = ambilSemuaData.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onSuccess, this::onError);
     }
 
     private void onSuccess(List<String> strings) {
-        String data1, data2;
-        data1 = strings.get(0);
-        data2 = strings.get(1);
+        String semuaData = strings.get(0);
+        String detailData = strings.get(1);
 
-        DataModel data = gson.fromJson(data1, DataModel.class);
+        DataModel data = gson.fromJson(semuaData, DataModel.class);
         txtName.setText(data.getDatas().get(USER_ID - 1).getName());
 
-        DetailDataModel dataa = gson.fromJson(data2, DetailDataModel.class);
+        DetailDataModel dataa = gson.fromJson(detailData, DetailDataModel.class);
         txtCompany.setText(dataa.getData().getPosition());
     }
 

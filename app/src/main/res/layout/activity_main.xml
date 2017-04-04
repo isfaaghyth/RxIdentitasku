@@ -14,7 +14,7 @@
         android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Name"
         android:textSize="17sp"
         android:textStyle="bold"/>
 
@@ -22,6 +22,6 @@
         android:id="@+id/txt_company"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Position." />
 
 </LinearLayout>
