@@ -8,19 +8,17 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.isfaaghyth.identitasku.model.DataModel;
 import app.isfaaghyth.identitasku.model.DetailDataModel;
+import app.isfaaghyth.identitasku.model.DataModel;
 import app.isfaaghyth.identitasku.network.RxGetDatas;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -58,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
         data1 = strings.get(0);
         data2 = strings.get(1);
 
-        DetailDataModel data = gson.fromJson(data1, DetailDataModel.class);
+        DataModel data = gson.fromJson(data1, DataModel.class);
         txtName.setText(data.getDatas().get(USER_ID - 1).getName());
 
-        DataModel dataa = gson.fromJson(data2, DataModel.class);
+        DetailDataModel dataa = gson.fromJson(data2, DetailDataModel.class);
         txtCompany.setText(dataa.getData().getPosition());
     }
 

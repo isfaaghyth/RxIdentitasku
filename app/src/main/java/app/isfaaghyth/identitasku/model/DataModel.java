@@ -1,12 +1,8 @@
 package app.isfaaghyth.identitasku.model;
 
-import android.support.v7.view.ActionBarPolicy;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-
-import okhttp3.Request;
 
 /**
  * ---------------------------------
@@ -16,7 +12,11 @@ import okhttp3.Request;
  */
 
 public class DataModel {
-    @SerializedName("data") private Data data;
+    @SerializedName("data") private List<Data> datas;
+
+    public List<Data> getDatas() {
+        return datas;
+    }
 
     public static class Data {
         @SerializedName("id") private int id;
@@ -33,23 +33,6 @@ public class DataModel {
 
         public String getPosition() {
             return position;
-        }
-    }
-
-    public Data getData() {
-        return data;
-    }
-
-//    public List<Data> getDatas() {
-//        return datas;
-//    }
-
-    public static class Builder {
-        public Request build(String URL) {
-            return new Request.Builder()
-                    .get()
-                    .url(URL)
-                    .build();
         }
     }
 }
